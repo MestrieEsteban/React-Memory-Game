@@ -6,16 +6,20 @@ class MemoryCards {
 		this.colors = [];
     }
 
+	clear(){
+		this.cards = [];
+        this.num_cards = 0;
+		this.colors = [];
+	}
+
 	generateRondomColor(){
 		for(let i = 0; i < this.num_cards/2; i++){
-			//random color
-			const r = Math.floor(Math.random() * 256);
-			const g = Math.floor(Math.random() * 256);
-			const b = Math.floor(Math.random() * 256);
-			const color = "rgb(" + r + "," + g + "," + b + ")";
+			//unique random color
+			const color = '#' + Math.floor(Math.random() * 16777215).toString(16);
 			this.colors.push(color);
 		}
 	}
+	
 
     generateCardSet() {
         //
@@ -43,7 +47,6 @@ class MemoryCards {
 		});
         // Randomize card
         this.cards = this.shuffle(this.cards);
-		console.log(this.cards);
     }
 
 	shuffle(array) {

@@ -30,6 +30,22 @@ class Game extends Component {
         });
     }
 
+	nextLevel(){
+		let foo = this.memoryCards.num_cards;
+		console.log(foo)
+		this.memoryCards.clear();
+		this.memoryCards.num_cards = foo*2;
+		this.memoryCards.generateRondomColor();
+        this.memoryCards.generateCardSet();
+        this.setState({
+            turnNo: 1,
+            pairsFound: 0,
+            numClicksWithinTurn: 0,
+            firstId: undefined,
+            secondId: undefined
+        });
+	}
+
     getCardViews() {
         const cardViews = this.memoryCards.cards.map(c =>
             <CardView key={c.id}
@@ -95,21 +111,21 @@ class Game extends Component {
     }
 
     onPlayAgain() {
-        this.initGame();
+        this.nextLevel();
     }
 
     render() {
         const cardViews = this.getCardViews();
         let gameStatus = <div className='Game-status'>
-            <div>Turn: {this.state.turnNo}</div>
-            <div>Pairs found: {this.state.pairsFound}</div>
+            <div>Tour: {this.state.turnNo}</div>
+            <div>Paire trouvée: {this.state.pairsFound}</div>
         </div>;
 
-        if (this.state.pairsFound === this.memoryCards.num_cards) {
+        if (this.state.pairsFound*2 === this.memoryCards.num_cards) {
             gameStatus = <div className='Game-status'>
-                <div>GAME COMPLETE!</div>
-                <div>You used {this.state.turnNo - 1} turns</div>
-                <div><button onClick={this.onPlayAgain}>Play again?</button></div></div>;
+                <div>Niveau fini !</div>
+                <div>Vous avez utilisé {this.state.turnNo - 1} tours</div>
+                <div><button onClick={this.onPlayAgain}>Prochain niveau</button></div></div>;
         }
 
         return (
