@@ -31,8 +31,7 @@ class Game extends Component {
     }
 
 	nextLevel(){
-		let foo = this.memoryCards.num_cards;
-		console.log(foo)
+		const foo = this.memoryCards.num_cards;
 		this.memoryCards.clear();
 		this.memoryCards.num_cards = foo*2;
 		this.memoryCards.generateRondomColor();
